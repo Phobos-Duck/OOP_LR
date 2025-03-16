@@ -1,6 +1,4 @@
-# LR_6
- 
-Пример работы программы:
+Лабораторные работы распределены по веткам, которые названы по порядку (LR_6, LR_7 и т.д)
 
-https://github.com/user-attachments/assets/4819da17-0f3e-4a6d-9c70-29ea6d5b7959
+Лабораторная работа 6 - https://github.com/Phobos-Duck/OOP_LR/tree/LR_6
 
