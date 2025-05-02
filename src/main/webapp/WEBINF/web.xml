@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-         version="3.0">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="3.0">
+
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>webapp.servlet.HomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AboutServlet</servlet-name>
+        <servlet-class>webapp.servlet.AboutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AboutServlet</servlet-name>
+        <url-pattern>/about</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ContactServlet</servlet-name>
+        <servlet-class>webapp.servlet.ContactServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ContactServlet</servlet-name>
+        <url-pattern>/contact</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FeedbackServlet</servlet-name>
+        <servlet-class>webapp.servlet.FeedbackServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FeedbackServlet</servlet-name>
+        <url-pattern>/feedback</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CalculatorPageServlet</servlet-name>
+        <servlet-class>webapp.servlet.CalculatorPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CalculatorPageServlet</servlet-name>
+        <url-pattern>/calculator</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>VolumeCalculatorServlet</servlet-name>
         <servlet-class>webapp.servlet.VolumeCalculatorServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>VolumeCalculatorServlet</servlet-name>
         <url-pattern>/calculateVolume</url-pattern>
