@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="3.0">
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
 
+    <!-- Home (Услуги / Главная) -->
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>webapp.servlet.HomeServlet</servlet-class>
@@ -10,6 +15,7 @@
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
 
+    <!-- About -->
     <servlet>
         <servlet-name>AboutServlet</servlet-name>
         <servlet-class>webapp.servlet.AboutServlet</servlet-class>
@@ -19,6 +25,7 @@
         <url-pattern>/about</url-pattern>
     </servlet-mapping>
 
+    <!-- Contact -->
     <servlet>
         <servlet-name>ContactServlet</servlet-name>
         <servlet-class>webapp.servlet.ContactServlet</servlet-class>
@@ -28,6 +35,7 @@
         <url-pattern>/contact</url-pattern>
     </servlet-mapping>
 
+    <!-- Feedback -->
     <servlet>
         <servlet-name>FeedbackServlet</servlet-name>
         <servlet-class>webapp.servlet.FeedbackServlet</servlet-class>
@@ -37,6 +45,7 @@
         <url-pattern>/feedback</url-pattern>
     </servlet-mapping>
 
+    <!-- Calculator -->
     <servlet>
         <servlet-name>CalculatorPageServlet</servlet-name>
         <servlet-class>webapp.servlet.CalculatorPageServlet</servlet-class>
@@ -46,6 +55,7 @@
         <url-pattern>/calculator</url-pattern>
     </servlet-mapping>
 
+    <!-- Обработка расчётов (POST) -->
     <servlet>
         <servlet-name>VolumeCalculatorServlet</servlet-name>
         <servlet-class>webapp.servlet.VolumeCalculatorServlet</servlet-class>
@@ -54,4 +64,10 @@
         <servlet-name>VolumeCalculatorServlet</servlet-name>
         <url-pattern>/calculateVolume</url-pattern>
     </servlet-mapping>
+
+    <!-- Главная страница -->
+    <welcome-file-list>
+        <welcome-file>home</welcome-file>
+    </welcome-file-list>
+
 </web-app>
