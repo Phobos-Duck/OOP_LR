@@ -9,7 +9,7 @@ import java.io.IOException;
 public class FeedbackServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/feedback.html").forward(request, response);
+        request.getRequestDispatcher("/feedback.jsp").forward(request, response);
     }
 }
 

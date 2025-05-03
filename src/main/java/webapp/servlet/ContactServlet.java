@@ -9,7 +9,7 @@ import java.io.IOException;
 public class ContactServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/contact.html").forward(request, response);
+        request.getRequestDispatcher("/contact.jsp").forward(request, response);
     }
 }
 
