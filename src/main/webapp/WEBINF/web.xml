@@ -24,7 +24,7 @@
     <!-- Контакты -->
     <servlet>
         <servlet-name>ContactsServlet</servlet-name>
-        <servlet-class>webapp.servlet.ContactsServlet</servlet-class>
+        <servlet-class>webapp.servlet.ContactServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ContactsServlet</servlet-name>
