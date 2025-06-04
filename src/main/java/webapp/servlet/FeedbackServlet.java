@@ -15,4 +15,14 @@ public class FeedbackServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.sendRedirect("feedback.html");
     }
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String name = req.getParameter("name");
+        String message = req.getParameter("message");
+
+        System.out.println("Имя: " + name);
+        System.out.println("Сообщение: " + message);
+
+        resp.sendRedirect("success.html");
+    }
 }
