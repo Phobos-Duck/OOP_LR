@@ -1,6 +1,7 @@
-# LR_6
+# LR_7
  
 Пример работы программы:
 
-https://github.com/user-attachments/assets/4819da17-0f3e-4a6d-9c70-29ea6d5b7959
+
+https://github.com/user-attachments/assets/aa48d4ce-1440-47e9-a44a-a087a0b370f8
 
