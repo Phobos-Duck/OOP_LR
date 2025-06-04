@@ -1,100 +1,76 @@
 package webapp.servlet;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.*;
-import java.sql.*;
+import java.lang.reflect.Type;
 import java.util.*;
 
 @WebServlet("/books")
 public class BookServlet extends HttpServlet {
-    private String dbUrl;
     private final Gson gson = new Gson();
+    private File dataFile;
 
     @Override
     public void init() {
-        try {
-            // Загрузка драйвера SQLite
-            Class.forName("org.sqlite.JDBC");
+        String path = getServletContext().getRealPath("/WEB-INF/data/books.json");
+        dataFile = new File(path);
 
-            // Получаем абсолютный путь до базы данных внутри проекта
-            dbUrl = "jdbc:sqlite:books.sqlite";
-
-            // Инициализация таблицы, если она не существует
-            try (Connection conn = DriverManager.getConnection(dbUrl);
-                 Statement stmt = conn.createStatement()) {
-
-                stmt.execute("CREATE TABLE IF NOT EXISTS books (" +
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "title TEXT NOT NULL," +
-                        "author TEXT NOT NULL," +
-                        "year INTEGER NOT NULL," +
-                        "level TEXT NOT NULL," +
-                        "topic TEXT NOT NULL)");
+        if (!dataFile.exists()) {
+            try {
+                dataFile.getParentFile().mkdirs();
+                dataFile.createNewFile();
+                try (Writer writer = new FileWriter(dataFile)) {
+                    gson.toJson(new ArrayList<>(), writer);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
-    // Получение всех книг — JSON-массив
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<Book> books = new ArrayList<>();
-
-        try (Connection conn = DriverManager.getConnection(dbUrl);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM books")) {
-
-            while (rs.next()) {
-                Book b = new Book();
-                b.title = rs.getString("title");
-                b.author = rs.getString("author");
-                b.year = rs.getInt("year");
-                b.level = rs.getString("level");
-                b.topic = rs.getString("topic");
-                books.add(b);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return;
-        }
+        List<Book> books = readBooksFromFile();
 
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(gson.toJson(books));
     }
 
-    // Добавление книги
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Book newBook = gson.fromJson(req.getReader(), Book.class);
+        List<Book> books = readBooksFromFile();
 
-        try (Connection conn = DriverManager.getConnection(dbUrl);
-             PreparedStatement ps = conn.prepareStatement(
-                     "INSERT INTO books (title, author, year, level, topic) VALUES (?, ?, ?, ?, ?)")) {
-
-            ps.setString(1, newBook.title);
-            ps.setString(2, newBook.author);
-            ps.setInt(3, newBook.year);
-            ps.setString(4, newBook.level);
-            ps.setString(5, newBook.topic);
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return;
-        }
+        books.add(newBook);
+        writeBooksToFile(books);
 
         resp.setStatus(HttpServletResponse.SC_OK);
     }
 
-    // Вложенный класс модели книги
+    private List<Book> readBooksFromFile() {
+        try (Reader reader = new FileReader(dataFile)) {
+            Type listType = new TypeToken<List<Book>>() {}.getType();
+            List<Book> books = gson.fromJson(reader, listType);
+            return books != null ? books : new ArrayList<>();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    private void writeBooksToFile(List<Book> books) {
+        try (Writer writer = new FileWriter(dataFile)) {
+            gson.toJson(books, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     static class Book {
         String title;
         String author;
