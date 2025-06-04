@@ -3,3 +3,5 @@
 Лабораторная работа 6 - https://github.com/Phobos-Duck/OOP_LR/tree/LR_6
 
 Лабораторная работа 7 - https://github.com/Phobos-Duck/OOP_LR/tree/LR_7
+
+Лабораторная работа 8 - https://github.com/Phobos-Duck/OOP_LR/tree/LR_8
