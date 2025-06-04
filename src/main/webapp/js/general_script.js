@@ -26,3 +26,4 @@ function calculateVolume() {
         .then(data => document.getElementById("result").textContent = data)
         .catch(error => console.error("Ошибка:", error));
 }
+

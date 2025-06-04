@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список математических книг</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Список книг по математике</h1>
+    <div class="nav-content">
+        <a class="nav-btn left-btn" href="index.html">На главную</a>
+    </div>
+    <form id="bookForm">
+        <label for="title">Название:</label>
+        <input type="text" id="title" required>
+
+        <label for="author">Автор:</label>
+        <input type="text" id="author" required>
+
+        <label for="year">Год:</label>
+        <input type="number" id="year" required>
+
+        <label for="level">Уровень:</label>
+        <input type="text" id="level" required>
+
+        <label for="topic">Тема:</label>
+        <input type="text" id="topic" required>
+
+        <button type="submit">Добавить книгу</button>
+    </form>
+
+    <h2>Текущий список:</h2>
+    <div id="bookList">
+        <ul id="list"></ul>
+    </div>
+</div>
+
+<script src="js/books_scripts.js"></script>
+</body>
+</html>
