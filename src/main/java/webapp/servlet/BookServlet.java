@@ -26,7 +26,6 @@ public class BookServlet extends HttpServlet {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Загрузка .env из корня проекта
             File envFile = new File(System.getProperty("user.dir"), ".env");
             if (!envFile.exists()) {
                 throw new FileNotFoundException(".env файл не найден: " + envFile.getAbsolutePath());
