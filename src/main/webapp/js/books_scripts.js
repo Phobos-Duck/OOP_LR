@@ -6,12 +6,22 @@ function loadBooks() {
         .then(books => {
             const list = document.getElementById("bookList");
             list.innerHTML = "";
-            books.forEach((book, index) => {
+
+            books.forEach(book => {
                 const li = document.createElement("li");
-                li.textContent = `${book.title} — ${book.author}, ${book.year} (${book.level}, ${book.topic})`;
+                li.innerHTML = `
+                    ${book.title} — ${book.author}, ${book.year} (${book.level}, ${book.topic})
+                    <button onclick="deleteBook(${book.id})" class="delete-btn">Удалить</button>
+                `;
                 list.appendChild(li);
             });
         });
+}
+
+function deleteBook(id) {
+    fetch(`books?id=${id}`, {
+        method: "DELETE"
+    }).then(() => loadBooks());
 }
 
 document.getElementById("bookForm").addEventListener("submit", function (e) {
@@ -28,11 +38,9 @@ document.getElementById("bookForm").addEventListener("submit", function (e) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(book)
-    }).then(response => {
-        if (response.ok) {
-            document.getElementById("bookForm").reset();
-            loadBooks();
-        }
+    }).then(() => {
+        this.reset();
+        loadBooks();
     });
 });
 
