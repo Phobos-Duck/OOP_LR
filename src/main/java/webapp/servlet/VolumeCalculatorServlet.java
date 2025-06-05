@@ -1,6 +1,6 @@
 package webapp.servlet;
 
-import webapp.service.VolumeService;
+import webapp.model.VolumeService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

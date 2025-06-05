@@ -1,4 +1,4 @@
-package webapp.service;
+package webapp.model;
 
 public class VolumeService {
     public double calculateVolume(String shape, double param1, double param2) {
